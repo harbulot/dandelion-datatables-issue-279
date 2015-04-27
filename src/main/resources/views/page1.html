@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:dt="http://github.com/dandelion/datatables">
+<head>
+<title>Page 1</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<script th:inline="javascript">
+    // <![CDATA[
+       function myAjaxTest(sSource, aoData, fnCallback, oSettings) {
+           oSettings.jqXHR = $.ajax({
+              "dataType": 'json',
+              "type": oSettings.sServerMethod,
+              "url": sSource,
+              "data": {},
+              "success": function(data) {
+                  var tableData = [];
+                  $.each(data || [], function(idx, row) {
+                      row['col_c'] = row.col_a + row.col_b;
+                      tableData.push(row);
+                  });
+                  oSettings.aaData = tableData;
+                  oSettings.iTotalDisplayRecords = tableData.length;
+                  oSettings.iTotalRecords = tableData.length;
+                  fnCallback(oSettings, tableData);
+              }
+           });
+        }
+    // ]]>
+    </script>
+
+    <div id="menu" class="container">
+        <ul>
+            <li><a href="/" th:href="@{/}">HOME</a></li>
+            <li><a href="/page1" th:href="@{/page1}">Page 1</a></li>
+            <li><a href="/page2" th:href="@{/page2}">Page 2</a></li>
+        </ul>
+    </div>
+    <div>
+        <table id="dummydata1_table" dt:table="true"
+            dt:url="@{/dummydata1}" dt:pageable="false"
+            dt:filterable="false" dt:sortable="false"
+            dt:serverdata="myAjaxTest"
+            dt:serverside="true">
+            <thead>
+                <tr>
+                    <th dt:property="col_a">Column A</th>
+                    <th dt:property="col_b">Column B</th>
+                    <th dt:property="col_c">Column C</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</body>
+</html>

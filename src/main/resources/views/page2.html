@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:dt="http://github.com/dandelion/datatables">
+<head>
+<title>Page 2</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+    <div id="menu" class="container">
+        <ul>
+            <li><a href="/" th:href="@{/}">HOME</a></li>
+            <li><a href="/page1" th:href="@{/page1}">Page 1</a></li>
+            <li><a href="/page2" th:href="@{/page2}">Page 2</a></li>
+        </ul>
+    </div>
+    <div>
+        <table id="dummydata2_table" dt:table="true"
+            dt:url="@{/dummydata2}">
+            <thead>
+                <tr>
+                    <th dt:property="col_a">Column A</th>
+                    <th dt:property="col_b">Column B</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</body>
+</html>

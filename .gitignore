@@ -1,0 +1,9 @@
+target
+.DS_Store
+.project
+.settings
+.classpath
+*.class
+derby.log
+*.bak
+Thumbs.db
